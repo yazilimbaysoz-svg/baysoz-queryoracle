@@ -1,0 +1,9 @@
+# Baysöz Labs <baysozlabs@proton.me> — deterministic dependency lock
+version = 1
+revision = 5
+requires-python = ">=3.13"
+
+[[package]]
+name = "baysoz-queryoracle"
+version = "1.0.0"
+source = { editable = "." }

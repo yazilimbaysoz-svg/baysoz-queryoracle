@@ -1,0 +1,13 @@
+# Baysöz Labs <baysozlabs@proton.me> — ignore local build artifacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.semgrep/
+.coverage
+.DS_Store

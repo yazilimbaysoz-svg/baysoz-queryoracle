@@ -1,0 +1,43 @@
+[project]
+name = "baysoz-queryoracle"
+version = "1.0.0"
+description = "Deterministic offline PromQL conformance oracle: parse, lint, cost analysis, portability profiles, fixture evaluation and SARIF CI gate by Baysöz Labs <baysozlabs@proton.me>"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { file = "LICENSE" }
+authors = [{ name = "Baysöz Labs", email = "baysozlabs@proton.me" }]
+keywords = ["promql", "observability", "sre", "conformance", "sarif", "ci"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: System :: Monitoring",
+]
+dependencies = []
+
+[project.scripts]
+baysoz-queryoracle = "baysoz_queryoracle.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yazilimbaysoz-svg/baysoz-queryoracle"
+Issues = "https://github.com/yazilimbaysoz-svg/baysoz-queryoracle/issues"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

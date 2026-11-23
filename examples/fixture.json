@@ -1,0 +1,34 @@
+{
+  "schema": "baysoz-queryoracle/fixture-v1",
+  "attribution": "Baysöz Labs <baysozlabs@proton.me>",
+  "series": [
+    {
+      "labels": {"__name__": "http_requests_total", "job": "checkout", "instance": "node-a"},
+      "samples": [[0, 0], [15, 12], [30, 21], [45, 38]]
+    },
+    {
+      "labels": {"__name__": "http_requests_total", "job": "checkout", "instance": "node-b"},
+      "samples": [[0, 0], [15, 4], [30, 9], [45, 16]]
+    },
+    {
+      "labels": {"__name__": "http_errors_total", "job": "checkout", "instance": "node-a"},
+      "samples": [[0, 0], [15, 1], [30, 2], [45, 2]]
+    },
+    {
+      "labels": {"__name__": "http_request_duration_seconds_bucket", "job": "checkout", "le": "0.1"},
+      "samples": [[0, 0], [15, 3], [30, 6], [45, 9]]
+    },
+    {
+      "labels": {"__name__": "http_request_duration_seconds_bucket", "job": "checkout", "le": "0.5"},
+      "samples": [[0, 0], [15, 12], [30, 24], [45, 42]]
+    },
+    {
+      "labels": {"__name__": "http_request_duration_seconds_bucket", "job": "checkout", "le": "1"},
+      "samples": [[0, 0], [15, 15], [30, 29], [45, 52]]
+    },
+    {
+      "labels": {"__name__": "http_request_duration_seconds_bucket", "job": "checkout", "le": "+Inf"},
+      "samples": [[0, 0], [15, 16], [30, 30], [45, 54]]
+    }
+  ]
+}

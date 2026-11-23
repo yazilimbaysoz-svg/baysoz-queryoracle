@@ -1,0 +1,35 @@
+{
+  "schema": "baysoz-queryoracle/pack-v1",
+  "attribution": "Baysöz Labs <baysozlabs@proton.me>",
+  "scrape_interval": "15s",
+  "fixture": "fixture.json",
+  "queries": [
+    {
+      "name": "checkout request rate",
+      "expr": "sum by (job) (rate(http_requests_total[30s]))",
+      "at": 45,
+      "expect": {
+        "resultType": "vector",
+        "result": [{"metric": {"job": "checkout"}, "value": [45, "1.6"]}]
+      }
+    },
+    {
+      "name": "p95 checkout latency",
+      "expr": "histogram_quantile(0.95, sum by (le) (increase(http_request_duration_seconds_bucket[30s])))",
+      "at": 45,
+      "expect": {
+        "resultType": "vector",
+        "result": [{"metric": {}, "value": [45, "0.885"]}]
+      }
+    },
+    {
+      "name": "checkout error ratio",
+      "expr": "sum(rate(http_errors_total[45s])) / sum(rate(http_requests_total[45s]))",
+      "at": 45,
+      "expect": {
+        "resultType": "vector",
+        "result": [{"metric": {}, "value": [45, "0.026316"]}]
+      }
+    }
+  ]
+}

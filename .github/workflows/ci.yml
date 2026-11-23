@@ -1,0 +1,39 @@
+# Baysöz Labs <baysozlabs@proton.me> — quality gates for baysoz-queryoracle
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: "latest"
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+      - name: Install
+        run: |
+          uv venv
+          uv pip install -e .
+          uv pip install pytest
+      - name: Tests
+        run: uv run pytest -q
+      - name: Lint and security checks
+        run: uvx ruff check --select E,F,W,S,B .
+      - name: Static application security testing
+        run: uvx semgrep --config p/default --error .
+      - name: Live CLI smoke test
+        run: |
+          uv run baysoz-queryoracle --version
+          uv run baysoz-queryoracle check 'sum by (job) (rate(http_requests_total[30s]))'
+          uv run baysoz-queryoracle verify examples/pack.json
